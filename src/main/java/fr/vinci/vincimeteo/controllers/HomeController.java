@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
-// @Controller (et pas @RestController) : les méthodes renvoient le NOM d'une page
-// Thymeleaf, que Spring va chercher dans src/main/resources/templates.
+// @Controller : les méthodes renvoient le NOM d'une page
 @Controller
 public class HomeController {
 

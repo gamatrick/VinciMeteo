@@ -9,7 +9,7 @@
 <main class="carte">
     <h1 th:text="${ville.nom}">Paris</h1>
 
-    <p class="meteo" th:text="${meteo}">20°C</p>
+    <p class="meteo" th:text="${meteo.temperature}">20°C</p>
 
     <table>
         <tr>
@@ -21,6 +21,12 @@
             <td th:text="${ville.longitude}">2.3522</td>
         </tr>
     </table>
+
+    <!-- Si l'heure ne bouge pas quand tu recharges la page, la donnée vient du cache -->
+    <p class="info">
+        Donnée récupérée à <span th:text="${meteo.recupereeA}">10:00:00</span>
+        (<span th:text="${nombreAppels}">1</span> appel(s) API depuis le démarrage)
+    </p>
 
     <a th:href="@{/}">&larr; Choisir une autre ville</a>
 </main>
