@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'VinciMeteo - ' + ${ville.nom}">VinciMeteo - Résultat</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="carte">
+    <h1 th:text="${ville.nom}">Paris</h1>
+
+    <p class="meteo" th:text="${meteo}">20°C</p>
+
+    <table>
+        <tr>
+            <th>Latitude</th>
+            <td th:text="${ville.latitude}">48.8566</td>
+        </tr>
+        <tr>
+            <th>Longitude</th>
+            <td th:text="${ville.longitude}">2.3522</td>
+        </tr>
+    </table>
+
+    <a th:href="@{/}">&larr; Choisir une autre ville</a>
+</main>
+</body>
+</html>

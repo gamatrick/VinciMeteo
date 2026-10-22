@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>VinciMeteo - Accueil</title>
+    <!-- th:href="@{...}" construit le bon lien vers src/main/resources/static/css/style.css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="carte">
+    <h1>VinciMeteo</h1>
+    <p>Choisis une ville pour connaître sa météo.</p>
+
+    <!-- th:if : ce paragraphe n'apparaît que s'il y a une erreur -->
+    <p class="erreur" th:if="${erreur}" th:text="${erreur}">Erreur</p>
+
+    <!-- Le formulaire envoie GET /resultat?ville=... -->
+    <form th:action="@{/resultat}" method="get">
+        <label for="ville">Ville :</label>
+        <select id="ville" name="ville">
+            <!-- th:each : une balise <option> par ville de la liste -->
+            <option th:each="v : ${villes}"
+                    th:value="${v.nom}"
+                    th:text="${v.nom}">Paris</option>
+        </select>
+        <button type="submit">Voir la météo</button>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#74b9ff, #dfe6e9);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carte {
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+select, button {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    margin: 0.5rem;
+}
+
+button {
+    background: #0984e3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0652a8;
+}
+
+.meteo {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+}
+
+table {
+    margin: 1rem auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.3rem 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.erreur {
+    color: #d63031;
+    font-weight: bold;
+}
