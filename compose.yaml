@@ -1,0 +1,8 @@
+services:
+  vincimeteo:
+    build: .
+    image: vincimeteo:v1
+    container_name: vincimeteo
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
