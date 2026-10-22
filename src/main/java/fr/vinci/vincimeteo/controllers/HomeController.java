@@ -1,6 +1,7 @@
 package fr.vinci.vincimeteo.controllers;
 
 import fr.vinci.vincimeteo.models.Ville;
+import fr.vinci.vincimeteo.services.MeteoService;
 import fr.vinci.vincimeteo.services.VilleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,15 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
-// @Controller : les méthodes renvoient le NOM d'une page
+// @Controller (et pas @RestController) : les méthodes renvoient le NOM d'une page
+// Thymeleaf, que Spring va chercher dans src/main/resources/templates.
 @Controller
 public class HomeController {
 
     private final VilleService villeService;
+    private final MeteoService meteoService;
 
-    // Injection par constructeur : Spring nous passe le VilleService qu'il a créé.
-    public HomeController(VilleService villeService) {
+    // Injection par constructeur : Spring nous passe les services qu'il a créés.
+    public HomeController(VilleService villeService, MeteoService meteoService) {
         this.villeService = villeService;
+        this.meteoService = meteoService;
     }
 
     // Page d'accueil : http://localhost:8080/
@@ -40,8 +44,11 @@ public class HomeController {
             return "index";
         }
 
-        model.addAttribute("ville", ville.get());
-        model.addAttribute("meteo", "20°C"); // météo encore fictive, comme dans la v1
+        Ville v = ville.get();
+        model.addAttribute("ville", v);
+        // La météo passe maintenant par le service, donc par le cache.
+        model.addAttribute("meteo", meteoService.getMeteo(v.latitude(), v.longitude()));
+        model.addAttribute("nombreAppels", meteoService.getNombreAppels());
         return "resultat"; // -> templates/resultat.html
     }
 }
