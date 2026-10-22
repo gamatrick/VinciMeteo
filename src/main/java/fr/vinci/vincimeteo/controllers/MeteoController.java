@@ -1,5 +1,7 @@
 package fr.vinci.vincimeteo.controllers;
 
+import fr.vinci.vincimeteo.models.Meteo;
+import fr.vinci.vincimeteo.services.MeteoService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,10 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/meteo")
 public class MeteoController {
 
-    @RequestMapping("/coord/{latitude}/{longitude}")
-    public Result giveMeteo(@PathVariable String latitude, @PathVariable String longitude) {
+    private final MeteoService meteoService;
 
-        return new Result(latitude, longitude, "20°C");
+    public MeteoController(MeteoService meteoService) {
+        this.meteoService = meteoService;
+    }
+
+    @RequestMapping("/coord/{latitude}/{longitude}")
+    public Result giveMeteo(@PathVariable double latitude, @PathVariable double longitude) {
+
+        // Même service, donc même cache que la page résultat.
+        Meteo meteo = meteoService.getMeteo(latitude, longitude);
+        return new Result(String.valueOf(latitude), String.valueOf(longitude), meteo.temperature());
 
     }
 
